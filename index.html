@@ -94,7 +94,26 @@ window.addEventListener('load', function () {
     points.sort(function(a, b){return b-a});
     document.getElementById("largest-number").innerHTML = points;
 }, true);
+        
+        $.ajax({
+  url:'https://www.googleapis.com/books/v1/volumes?q=javascript',
+  success: function(json){
+
+			var htmlcontent = "";
+			for (i = 0; i < json.items.length; i++) 		
+      		{
+       			htmlcontent += "<li>Title: " + json.items[i].volumeInfo.title + "&nbsp Author: " + json.items[i].volumeInfo.authors[0] + "<br>";
+      		}
+			document.getElementById("books").innerHTML = "<ul>" + htmlcontent + "</ul><br>";
+  
+		
+       
+		}
+  
+});
     </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -116,7 +135,8 @@ window.addEventListener('load', function () {
         <div id="largest-number"></div>
     </section>
 
-
+Google book API using Ajax:
+    <div id="books"></div>
 
     <footer>Copyright &copy; Pavanesh</footer>
 
